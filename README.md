@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# SkyblockFixes
+## Fabric 1.21.5 Mod
+by Penguin
 
-## Setup
+Fixes for Skyblock
 
-For setup instructions please see the [fabric documentation page](https://docs.fabricmc.net/develop/getting-started/setting-up-a-development-environment) that relates to the IDE that you are using.
 
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+- Blocks Invincibility Frame hit sound
+- Fixes Glass Pane connecting desync
