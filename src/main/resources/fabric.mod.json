@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "sbf",
+	"name": "SkyblockFixes",
+	"version": "$mod_version",
+	"description": "Fixes for Skyblock",
+	"authors": [
+		"Penguin"
+	],
+	"contact": {
+		"homepage": "https://nohomepage.com",
+		"sources": "https://github.com/P3nguinMinecraft/SkyblockFixes"
+	},
+	"license": "MIT",
+	"icon": "assets/sbf/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.sbf.SkyblockFixes"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"fabric": "*",
+		"minecraft": "1.21.5",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"mixins": [
+		"sbf.mixins.json"
+	],
+	"accessWidener": "sbf.accesswidener"
+}
