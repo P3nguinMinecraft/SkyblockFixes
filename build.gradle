@@ -1,0 +1,104 @@
+plugins {
+	id 'fabric-loom' version "1.10-SNAPSHOT"
+	id 'maven-publish'
+	id 'java'
+	id 'com.gradleup.shadow' version "9.0.0-beta17"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	group = project.group + "." + project.mod_id
+	archivesName = project.mod_file_name
+	version = project.mod_version
+
+	if (mod_version.endsWith('-dev')) {
+		version += "." + new Date().format('MM.dd-HH.mm.ss')
+	} else {
+		version += "+" + project.minecraft_version
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url = "https://maven.fabricmc.net/"
+	}
+	maven {
+		url = "https://repo.essential.gg/repository/maven-public"
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/sbf.accesswidener")
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${base.archivesName}" }
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadow]
+	archiveClassifier.set("shadow")
+}
+
+remapJar {
+	dependsOn(shadowJar)
+	inputFile = tasks.shadowJar.archiveFile
+}
+
+processResources {
+	inputs.property "mod_version", project.mod_version
+	inputs.property "minecraft_version", project.minecraft_version
+
+	filesMatching("fabric.mod.json") {
+		expand "mod_version": project.mod_version + "+" + project.minecraft_version
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}
+		resources {
+			srcDirs = ['src/main/resources']
+		}
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+	}
+}
+
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		// published repos
+	}
+}
+
+apply plugin: 'idea'
