@@ -18,7 +18,7 @@ public abstract class SnowBlockMixin {
     /**
      * In vanilla 1.21+, 1-layer snow has no collision (VoxelShapes.empty()).
      * In 1.8.9, 1-layer snow had a zero-height collision box, which still affected stacked collision merging.
-     * This overwrite restores that old behavior.
+     * This mixin restores that old behavior by creating a tiny collision box under the block.
      */
 
     @Inject(method = "getCollisionShape", at = @At("HEAD"), cancellable = true)
