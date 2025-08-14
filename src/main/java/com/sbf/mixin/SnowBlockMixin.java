@@ -25,7 +25,7 @@ public abstract class SnowBlockMixin {
     protected void getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
         int layers = state.get(SnowBlock.LAYERS);
         if (layers == 1) {
-            cir.setReturnValue(VoxelShapes.cuboid(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D));
+            cir.setReturnValue(VoxelShapes.cuboid(0.0D, -0.001D, 0.0D, 1.0D, 0.0D, 1.0D));
         }
     }
 }
