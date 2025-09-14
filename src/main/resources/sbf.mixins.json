@@ -8,5 +8,5 @@
         "SnowBlockMixin",
         "ClientPlayerInteractionManagerMixin"
     ],
-    "verbose": true,
+    "verbose": true
 }
