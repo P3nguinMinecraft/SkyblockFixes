@@ -1,5 +1,6 @@
 package com.sbf;
 
+import com.sbf.feature.Lasso;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +13,6 @@ public class SkyblockFixes implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // TODO: Literally nothing here lmfao
+        Lasso.init();
     }
 }
